@@ -43,7 +43,24 @@ function preOrder(node: BNodeNum | null): number[] {
  * Returns an array of values of visited nodes. */
 
 function postOrder(node: BNodeNum | null): number[] {
-  return [42];
+  if (node === null) return [];
+
+  //stack: bottom: A, B,D,E,F, C, G :top
+  let result: number[] = []; //A, B
+
+  //NOTE: need to add initial node to the result
+  const lNode = node.lnode; // B, D
+  const rNode = node.rnode; // C, E
+
+  // preOrder returns an array
+  // to combine result with any new results, spread out the return
+  result.push(...postOrder(lNode));
+  result.push(...postOrder(rNode));
+
+  result.push(node.val)
+
+  return result; 
+
 }
 
 export { preOrder, postOrder };
