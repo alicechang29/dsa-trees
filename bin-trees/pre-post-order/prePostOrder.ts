@@ -25,7 +25,7 @@ function preOrder(node: BNodeNum | null): number[] {
 
   //stack: bottom: A, B,D,E,F, C, G :top
 
-  //NOTE: need to add initial node to the result
+  //NOTE: need to add initial node to the result FIXME: TODO:
   const result: number[] = [node.val]; //A, B
   const lNode = node.lnode; // B, D
   const rNode = node.rnode; // C, E
