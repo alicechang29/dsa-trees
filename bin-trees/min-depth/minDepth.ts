@@ -20,27 +20,19 @@ move onto next node
  **/
 
 function minDepth(node: BNodeNum): number {
-  let depth = 0;
-  const toVisit = new Queue<[BNodeNum, number]>([[node, depth]]); // [c,1], [d,2], [e,2]
+  if (node.lnode === null && node.rnode === null) return 1;
 
-  while (!toVisit.isEmpty()) {
-
-    const currQueueItem = toVisit.dequeue(); //
-    const currNode = currQueueItem[0]; //C
-    depth = currQueueItem[1];  //1
-
-    depth++;
-
-    if (currNode.lnode === null || currNode.rnode === null) {
-      return depth;
-    }
-
-    toVisit.enqueue([currNode.lnode, depth]);
-    toVisit.enqueue([currNode.rnode, depth]);
-
-
+  if (node.lnode === null && node.rnode !== null) {
+    return minDepth(node.rnode) + 1;
   }
-  return depth;
+
+  if (node.rnode === null && node.lnode !== null) {
+    return minDepth(node.lnode) + 1;
+  }
+
+  return Math.min(minDepth(node.lnode!), minDepth(node.rnode!)) + 1;
 }
+
+
 
 export { minDepth };
